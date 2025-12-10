@@ -1,4 +1,6 @@
-pandas 
-numpy 
-seaborn
--e .
+pandas==2.2.2
+numpy==1.26.4
+seaborn==0.13.2
+matplotlib==3.8.4
+scikit-learn==1.5.2
+#-e .
