@@ -1,5 +1,6 @@
 import os
 import sys
+from src.components.model_trainer import Modeltrainer
 from src.exception import CustomException
 from src.logger import logging
 import pandas as pd
@@ -47,4 +48,7 @@ if __name__ == "__main__":
     train_data,test_data =  obj.initiate_data_ingestion()
 
     data_transformation = Datatransformation()
-    data_transformation.initiate_data_transformation(train_data,test_data)
+    train_arr , test_arr,_ = data_transformation.initiate_data_transformation(train_data,test_data)
+    modeltrainer = Modeltrainer()
+    print(modeltrainer.initiate_model_trainer
+    (train_arr,test_arr))
