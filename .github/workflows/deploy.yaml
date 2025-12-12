@@ -1,5 +1,6 @@
 name: Deploy to EC2 using ECR
 
+
 on:
   push:
     branches:
