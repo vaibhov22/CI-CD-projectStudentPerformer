@@ -40,17 +40,22 @@ jobs:
 
         ssh -o StrictHostKeyChecking=no -i ec2key.pem ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
 
-        # Login EC2 to ECR
-        aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 972709131465.dkr.ecr.eu-west-1.amazonaws.com
+        # INSTALL AWS CLI (IMPORTANT)
+        sudo apt update -y
+        sudo apt install -y awscli
 
-        # Pull latest Docker image
+        # LOGIN EC2 TO ECR
+        aws ecr get-login-password --region eu-west-1 | \
+        docker login --username AWS --password-stdin 972709131465.dkr.ecr.eu-west-1.amazonaws.com
+
+        # PULL LATEST IMAGE
         docker pull 972709131465.dkr.ecr.eu-west-1.amazonaws.com/studentperformance:latest
 
-        # Stop old container if exists
+        # STOP OLD CONTAINER IF EXISTS
         docker stop studentperformance || true
         docker rm studentperformance || true
 
-        # Run new container
+        # RUN NEW CONTAINER
         docker run -d -p 5000:5000 --name studentperformance \
         972709131465.dkr.ecr.eu-west-1.amazonaws.com/studentperformance:latest
 
