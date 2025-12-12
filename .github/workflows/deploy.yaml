@@ -40,9 +40,12 @@ jobs:
 
         ssh -o StrictHostKeyChecking=no -i ec2key.pem ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
 
-        # INSTALL AWS CLI (IMPORTANT)
+        # INSTALL AWS CLI v2 (Correct for Ubuntu 24.04)
         sudo apt update -y
-        sudo apt install -y awscli
+        sudo apt install unzip -y
+        curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+        unzip awscliv2.zip
+        sudo ./aws/install
 
         # LOGIN EC2 TO ECR
         aws ecr get-login-password --region eu-west-1 | \
