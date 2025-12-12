@@ -1,6 +1,5 @@
 name: Deploy to EC2 using ECR
 
-
 on:
   push:
     branches:
@@ -41,12 +40,12 @@ jobs:
 
         ssh -o StrictHostKeyChecking=no -i ec2key.pem ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
 
-        # INSTALL AWS CLI v2 (Correct for Ubuntu 24.04)
+        # INSTALL / UPDATE AWS CLI v2 (NON-INTERACTIVE)
         sudo apt update -y
-        sudo apt install unzip -y
+        sudo apt install -y unzip
         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-        unzip awscliv2.zip
-        sudo ./aws/install
+        unzip -o awscliv2.zip
+        sudo ./aws/install --update
 
         # LOGIN EC2 TO ECR
         aws ecr get-login-password --region eu-west-1 | \
