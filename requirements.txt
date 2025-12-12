@@ -1,11 +1,1 @@
-numpy==1.23.5
-pandas==1.5.3
-matplotlib==3.8.4
-seaborn==0.13.2
-scikit-learn==1.5.2
-dill
-catboost
-xgboost
-flask
-gunicorn
--e .
+972709131465.dkr.ecr.eu-west-1.amazonaws.com/studentperformance
